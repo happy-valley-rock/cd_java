@@ -1,4 +1,4 @@
-##Clase 15
+## Clase 15
 
 ![image](/assets/desafio-6-1.png)
 ![image](/assets/desafio-6-2.png)
