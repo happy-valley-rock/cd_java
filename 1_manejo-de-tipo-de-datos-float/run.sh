@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 
-echo "Validate are the same version Java Compilar and Java";
+file="$(echo *.java)";
+className="${file%.*}"
+
+echo $file $className
+
+echo "Validate are the same version Java Compiler and Java Runtime";
 javac -version;
 java -version;
 
 echo "Compiling...";
-javac NumeroFlotanteDelgado.java;
+javac $file;
 
 sleep 2;
 
 echo "Running...";
-java NumeroFlotanteDelgado;
+java $className;
