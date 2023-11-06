@@ -3,8 +3,6 @@
 file="$(echo *.java)";
 className="${file%.*}"
 
-echo $file $className
-
 echo "Validate are the same version Java Compiler and Java Runtime";
 javac -version;
 java -version;

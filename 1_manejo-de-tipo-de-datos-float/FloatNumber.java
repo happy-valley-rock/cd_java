@@ -1,8 +1,8 @@
 
-public class NumeroFlotanteDelgado {
+public class FloatNumber {
   public static void main(String[] args) {
     float number = 3.14159265359f;
-
+    
     System.out.printf("\no Mostrar parte entera y separado la parte decimal de la siguiente variable de tipo float\n");
     split(number);
   }
