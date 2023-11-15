@@ -27,7 +27,7 @@ class Person {
     }
 }
 
-public class ListarPersonasDelgado {
+public class PeopleList {
   public static void main(String[] args) {
     ArrayList<Person> people = howManyInstancePerson(5);
     sortAndShowPeople(people, "FirstName", "asc");
