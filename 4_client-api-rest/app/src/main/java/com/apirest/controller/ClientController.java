@@ -45,6 +45,6 @@ public class ClientController {
                 age
         );
 
-        return new ResponseEntity<>(clienResponse, HttpStatus.OK);
+        return new ResponseEntity<>(clientResponse, HttpStatus.OK);
     }
 }

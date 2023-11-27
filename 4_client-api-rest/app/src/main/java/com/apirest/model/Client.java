@@ -1,18 +1,16 @@
 package com.apirest.model;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Date;
 
 @Data
 @Entity
-@Table (name="clients")
+@Table(name="clients")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    private Integer id;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -20,3 +18,4 @@ public class Client {
     @Column(name = "birth_date")
     private Date birthDate;
 }
+

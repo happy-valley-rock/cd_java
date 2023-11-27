@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -21,8 +23,10 @@ public class ClientService {
 
     public Client getById(Integer clientId) {
         System.out.println("> Get client by id " + clientId.toString());
+        List<Client> listClient = clientRepository.findAll();
 
-        return this.clientRepository.getReferenceById(clientId);
+        Optional<Client> optionalClient = this.clientRepository.findById(clientId);
+        return optionalClient.orElse(null);
     }
 
     public Integer calculateAgeFromBirthDate(Date date) {
