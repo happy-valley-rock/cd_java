@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name="clients")
+@Table(name="clients", schema="api_rest")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

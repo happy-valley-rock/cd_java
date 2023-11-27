@@ -7,20 +7,19 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ClientService {
 
-    private final ClientRepository clientRepository;
+    private  final ClientRepository clientRepository;
 
     @Autowired
     public ClientService(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
-
     public Client getById(Integer clientId) {
         System.out.println("> Get client by id " + clientId.toString());
         Optional<Client> optionalClient = this.clientRepository.findById(clientId);
@@ -33,5 +32,4 @@ public class ClientService {
         Period period = Period.between(birthDate, currentDate);
         return period.getYears();
     }
-
 }
