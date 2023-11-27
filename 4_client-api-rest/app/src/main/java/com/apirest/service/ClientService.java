@@ -23,8 +23,6 @@ public class ClientService {
 
     public Client getById(Integer clientId) {
         System.out.println("> Get client by id " + clientId.toString());
-        List<Client> listClient = clientRepository.findAll();
-
         Optional<Client> optionalClient = this.clientRepository.findById(clientId);
         return optionalClient.orElse(null);
     }
