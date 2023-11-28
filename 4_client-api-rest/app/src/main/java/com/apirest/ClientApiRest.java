@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ClientApiRestDelgado {
+public class ClientApiRest {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ClientApiRestDelgado.class, args);
+		SpringApplication.run(ClientApiRest.class, args);
 	}
 
 }

@@ -3,6 +3,8 @@ package com.billing.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "clients", schema = "billing_project")
@@ -18,4 +20,8 @@ public class Client {
     private String documentNumber;
     @Column(name = "document_type")
     private String documentType;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Invoice> invoices;
+
 }

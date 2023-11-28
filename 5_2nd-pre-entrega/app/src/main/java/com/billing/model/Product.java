@@ -13,5 +13,6 @@ public class Product {
     private String description;
     private String code;
     private Integer stock;
-    private Double price;
+    private Double sellPrice;
+    private Double purchasePrice;
 }
