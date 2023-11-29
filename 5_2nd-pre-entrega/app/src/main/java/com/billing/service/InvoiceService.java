@@ -19,22 +19,47 @@ public class InvoiceService {
 
     public Invoice getById(Integer invoiceId) {
         System.out.println("> Get invoice by id " + invoiceId.toString());
-        Optional<Invoice> optionalInvoice = this.invoiceRepository.findById(invoiceId);
-        return optionalInvoice.orElse(null);
+        try {
+            Optional<Invoice> optionalInvoice = this.invoiceRepository.findById(invoiceId);
+            if (optionalInvoice.orElse(null) == null) throw new Error("Invoice does not exist");
+            return optionalInvoice.get();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            throw exception;
+        }
     }
 
-    public void createInvoice(Invoice invoice) {
+    public Invoice createInvoice(Invoice invoice) {
         System.out.println("> Create a invoice");
-        this.invoiceRepository.save(invoice);
+        try {
+            return this.invoiceRepository.save(invoice);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            throw exception;
+        }
     }
 
-    public void updateInvoiceById(Invoice invoice, Integer invoiceId) {
+    public Invoice updateInvoiceById(Invoice invoice, Integer invoiceId) {
         System.out.println("> Update invoice with id " + invoiceId.toString());
+        try {
+            Invoice invoiceFounded = this.getById(invoiceId);
+            invoiceFounded = invoice;
+            return this.invoiceRepository.save(invoiceFounded);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            throw exception;
+        }
+    }
 
-        Invoice invoiceFounded = this.getById(invoiceId);
-        if (invoiceFounded == null) throw new Error("Invoice does not exist");
-
-        invoiceFounded = invoice;
-        this.invoiceRepository.save(invoiceFounded);
+    public void removeInvoice(Integer invoiceId) {
+        System.out.println("> Remove invoice with id " + invoiceId.toString());
+        try {
+            this.getById(invoiceId);
+            this.invoiceRepository.deleteById(invoiceId);
+        }
+        catch (Exception exception) {
+            exception.printStackTrace();
+            throw exception;
+        }
     }
 }

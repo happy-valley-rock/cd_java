@@ -2,7 +2,9 @@ package com.billing.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,6 +24,6 @@ public class Client {
     private String documentType;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Invoice> invoices;
+    private List<Invoice> invoices = new ArrayList<Invoice>();
 
 }

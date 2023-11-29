@@ -19,22 +19,47 @@ public class ClientService {
 
     public Client getById(Integer clientId) {
         System.out.println("> Get client by id " + clientId.toString());
-        Optional<Client> optionalClient = this.clientRepository.findById(clientId);
-        return optionalClient.orElse(null);
+        try {
+            Optional<Client> optionalClient = this.clientRepository.findById(clientId);
+            if (optionalClient.orElse(null) == null) throw new Error("Client does not exist");
+            return optionalClient.get();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            throw exception;
+        }
     }
 
-    public void createClient(Client client) {
+    public Client createClient(Client client) {
         System.out.println("> Create a client");
-        this.clientRepository.save(client);
+        try {
+             return this.clientRepository.save(client);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            throw exception;
+        }
     }
 
-    public void updateClientById(Client client, Integer clientId) {
+    public Client updateClientById(Client client, Integer clientId) {
         System.out.println("> Update client with id " + clientId.toString());
+        try {
+            Client clientFounded = this.getById(clientId);
+            clientFounded = client;
+            return this.clientRepository.save(clientFounded);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            throw exception;
+        }
+    }
 
-        Client clientFounded = this.getById(clientId);
-        if (clientFounded == null) throw new Error("Client does not exist");
-
-        clientFounded = client;
-        this.clientRepository.save(clientFounded);
+    public void removeClient(Integer clientId) {
+        System.out.println("> Remove client with id " + clientId.toString());
+        try {
+            this.getById(clientId);
+            this.clientRepository.deleteById(clientId);
+        }
+        catch (Exception exception) {
+            exception.printStackTrace();
+            throw exception;
+        }
     }
 }

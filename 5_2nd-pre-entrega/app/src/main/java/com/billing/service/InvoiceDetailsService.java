@@ -37,4 +37,9 @@ public class InvoiceDetailsService {
         invoiceDetailsFounded = invoiceDetails;
         this.invoiceDetailsRepository.save(invoiceDetailsFounded);
     }
+
+    public void removeInvoiceDetails(Integer invoiceDetailsId) {
+        System.out.println("> Remove invoice details with id " + invoiceDetailsId.toString());
+        this.invoiceDetailsRepository.deleteById(invoiceDetailsId);
+    }
 }
