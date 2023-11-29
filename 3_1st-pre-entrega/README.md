@@ -1,3 +1,1 @@
-## Clase 8
-
-![image](/assets/desafio-3.png)
+- [Desafio 3 - Primera Pre-entrega](/challenges_descriptions/3_1st-pre-entrega.md)

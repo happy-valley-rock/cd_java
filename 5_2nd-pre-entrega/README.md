@@ -1,4 +1,1 @@
-## Clase 12
-
-![image](/assets/desafio-5-1.png)
-![image](/assets/desafio-5-2.png)
+- [Desafio 5 - Segunda Pre-entrega](/challenges_descriptions/5_2nd-pre-entrega.md)

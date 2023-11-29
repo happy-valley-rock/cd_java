@@ -1,4 +1,1 @@
-## Clase 11
-
-![image](/assets/desafio-4-1.png)
-![image](/assets/desafio-4-2.png)
+- [Desafio 4 - Client API rest](/challenges_descriptions/4_client-api-rest.md)

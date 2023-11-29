@@ -1,3 +1,1 @@
-## Clase 1
-
-![image](/assets/desafio-1.png)
+- [Desafio 1 - Manejo de tipo de datos float](/challenges_descriptions/1_manejo-de-tipo-de-datos-float.md)

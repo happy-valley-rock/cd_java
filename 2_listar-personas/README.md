@@ -1,4 +1,1 @@
-## Clase 6
-
-![image](/assets/desafio-2-1.png)
-![image](/assets/desafio-2-2.png)
+- [Desafio 2 - Listar personas](/challenges_descriptions/2_listar-personas.md)
