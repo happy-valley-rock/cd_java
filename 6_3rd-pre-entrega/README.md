@@ -1,7 +1,11 @@
 # Simple POS System
 > Project for Coderhouse
+>
+> <a target="_blank" href="https://www.coderhouse.com">![Static Badge](https://img.shields.io/badge/coderhouse-d1e500)</a>
 
-![GitHub top language](https://img.shields.io/github/languages/top/happy-valley-rock/cd_java/tree/master/6_3rd-pre-entrega?style=flat-square)
+<a target="_blank" href="https://github.com/happy-valley-rock">![Static Badge](https://img.shields.io/badge/author-181717?logo=github)</a>
+<a target="_blank" href="https://www.linkedin.com/in/esequieldelgado-developer">![Static Badge](https://img.shields.io/badge/linkedin-0A66C2?logo=github)</a>
+![GitHub top language](https://img.shields.io/github/languages/top/happy-valley-rock/cd_java)
 
 1. [Challenge](#challenge)
 2. [Description](#description)
@@ -63,3 +67,5 @@ spring.jpa.hibernate.ddl-auto=update
 | org.modelmapper          | modelmapper                  | 3.2.0   |
 
 ## DER
+
+<img src="./assets/der.drawio.png" width="100%">

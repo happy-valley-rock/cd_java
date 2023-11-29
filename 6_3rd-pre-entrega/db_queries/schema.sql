@@ -1,6 +1,7 @@
 /*  SQL Variant for PostgreSQL - PL/pgSQL  */
 
-DROP DATABASE IF EXISTS billing_project;
+DROP DATABASE IF EXISTS pos_simple CASCADE;
+CREATE DATABASE pos_simple;
 
-CREATE DATABASE billing_project;
-CREATE SCHEMA billing_project;
+DROP SCHEMA IF EXISTS pos_simple CASCADE;
+CREATE SCHEMA pos_simple;
