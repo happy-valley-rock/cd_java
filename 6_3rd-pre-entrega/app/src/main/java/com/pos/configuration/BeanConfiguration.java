@@ -1,6 +1,6 @@
-package com.billing.configuration;
+package com.pos.configuration;
 
-import com.billing.util.DtoEntityConverter;
+import com.pos.util.DtoEntityConverter;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

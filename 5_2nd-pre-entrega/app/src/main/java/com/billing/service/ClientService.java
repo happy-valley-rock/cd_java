@@ -19,47 +19,22 @@ public class ClientService {
 
     public Client getById(Integer clientId) {
         System.out.println("> Get client by id " + clientId.toString());
-        try {
-            Optional<Client> optionalClient = this.clientRepository.findById(clientId);
-            if (optionalClient.orElse(null) == null) throw new Error("Client does not exist");
-            return optionalClient.get();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            throw exception;
-        }
+        Optional<Client> optionalClient = this.clientRepository.findById(clientId);
+        return optionalClient.orElse(null);
     }
 
-    public Client createClient(Client client) {
+    public void createClient(Client client) {
         System.out.println("> Create a client");
-        try {
-             return this.clientRepository.save(client);
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            throw exception;
-        }
+        this.clientRepository.save(client);
     }
 
-    public Client updateClientById(Client client, Integer clientId) {
+    public void updateClientById(Client client, Integer clientId) {
         System.out.println("> Update client with id " + clientId.toString());
-        try {
-            Client clientFounded = this.getById(clientId);
-            clientFounded = client;
-            return this.clientRepository.save(clientFounded);
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            throw exception;
-        }
-    }
 
-    public void removeClient(Integer clientId) {
-        System.out.println("> Remove client with id " + clientId.toString());
-        try {
-            this.getById(clientId);
-            this.clientRepository.deleteById(clientId);
-        }
-        catch (Exception exception) {
-            exception.printStackTrace();
-            throw exception;
-        }
+        Client clientFounded = this.getById(clientId);
+        if (clientFounded == null) throw new Error("Client does not exist");
+
+        clientFounded = client;
+        this.clientRepository.save(clientFounded);
     }
 }

@@ -34,7 +34,7 @@ After that you can run the project with
 mvn spring-boot:run
 ```
 
-Also you can test all the services with the [Postman](./collection_postman/SimplePOS.postman_collection.json) collection in `/collection_postman`
+Also you can test all the services with the [Postman](./collection_postman/POS Simple.postman_collection.json) collection in `/collection_postman`
 
 ## Environment
 

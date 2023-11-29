@@ -1,4 +1,4 @@
-package com.billing.model.dto;
+package com.pos.model.dto;
 
 import lombok.Data;
 

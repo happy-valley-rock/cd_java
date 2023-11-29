@@ -1,4 +1,4 @@
-package com.billing.model;
+package com.pos.model;
 
 import lombok.Getter;
 import lombok.Setter;

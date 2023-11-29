@@ -1,11 +1,11 @@
-package com.billing.util;
+package com.pos.util;
 
-import com.billing.model.Client;
-import com.billing.model.Invoice;
-import com.billing.model.Product;
-import com.billing.model.dto.ClientDto;
-import com.billing.model.dto.InvoiceDto;
-import com.billing.model.dto.ProductDto;
+import com.pos.model.Client;
+import com.pos.model.Invoice;
+import com.pos.model.Product;
+import com.pos.model.dto.ClientDto;
+import com.pos.model.dto.InvoiceDto;
+import com.pos.model.dto.ProductDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -38,7 +38,7 @@ public class DtoEntityConverter {
         return invoiceDto;
     }
 
-    public Invoice convertInvoiceToIdentity(InvoiceDto invoiceDto) {
+    public Invoice convertInvoiceToIdentity(InvoiceDto invoiceDto, Client client) {
         Invoice invoice = this.modelMapper.map(invoiceDto, Invoice.class);
         return invoice;
     }
