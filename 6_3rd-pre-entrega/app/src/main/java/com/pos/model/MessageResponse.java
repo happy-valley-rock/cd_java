@@ -15,6 +15,7 @@ public class MessageResponse {
     public MessageResponse(String description) {
         this.description = description;
     }
+
     public MessageResponse(String description, Integer status) {
         this.description = description;
         this.status = status;

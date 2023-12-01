@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class InvoiceDto {
+public class InvoiceDtoRequest {
     private Integer clientId;
-    private List<InvoiceDetailsDto> products;
+    private List<InvoiceDetailDtoRequest> products;
 }

@@ -2,12 +2,12 @@ package com.pos.service;
 
 import com.pos.model.Client;
 import com.pos.model.Invoice;
-import com.pos.model.dto.InvoiceDto;
+import com.pos.model.InvoiceDetail;
+import com.pos.model.dto.InvoiceDtoRequest;
 import com.pos.repository.InvoiceRepository;
-import com.pos.util.DtoEntityConverter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,20 +15,16 @@ public class InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
     private final ClientService clientService;
-    private final InvoiceDetailsService invoiceDetailsService;
-    private final DtoEntityConverter dtoEntityConverter;
+    private final InvoiceDetailService invoiceDetailService;
 
-    @Autowired
     public InvoiceService(
             InvoiceRepository invoiceRepository,
             ClientService clientService,
-            InvoiceDetailsService invoiceDetailsService,
-            DtoEntityConverter dtoEntityConverter
+            InvoiceDetailService invoiceDetailService
     ) {
         this.invoiceRepository = invoiceRepository;
         this.clientService = clientService;
-        this.invoiceDetailsService = invoiceDetailsService;
-        this.dtoEntityConverter = dtoEntityConverter;
+        this.invoiceDetailService = invoiceDetailService;
     }
 
     public Invoice getById(Integer invoiceId) {
@@ -43,14 +39,20 @@ public class InvoiceService {
         }
     }
 
-    public Invoice createInvoice(InvoiceDto invoiceData) {
+    public Invoice createInvoice(InvoiceDtoRequest invoiceData) {
         System.out.println("> Create a invoice");
+
+        Client client = this.clientService.getById(invoiceData.getClientId());
+        Invoice invoice = new Invoice();
+        invoice.setClient(client);
+
         try {
-            Invoice invoice = new Invoice();
-            Client client = this.clientService.getById(invoiceData.getClientId());
-            invoice.setClient(client);
-            this.invoiceDetailsService.createManyInvoiceDetails(invoice, invoiceData.getProducts());
-            return this.invoiceRepository.save(invoice);
+            this.invoiceRepository.save(invoice);
+            List<InvoiceDetail> invoiceDetails = this.invoiceDetailService.createManyInvoiceDetails(invoice, invoiceData.getProducts());
+            this.invoiceRepository.flush();
+            invoice.setDetails(invoiceDetails);
+
+            return invoice;
         } catch (Exception exception) {
             exception.printStackTrace();
             throw exception;
@@ -74,8 +76,7 @@ public class InvoiceService {
         try {
             this.getById(invoiceId);
             this.invoiceRepository.deleteById(invoiceId);
-        }
-        catch (Exception exception) {
+        } catch (Exception exception) {
             exception.printStackTrace();
             throw exception;
         }

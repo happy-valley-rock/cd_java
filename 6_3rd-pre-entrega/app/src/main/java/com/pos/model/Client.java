@@ -1,11 +1,15 @@
 package com.pos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Entity
-@Table(name = "clients", schema = "billing_project")
+@Table(name = "clients", schema = "pos_simple")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +24,11 @@ public class Client {
     private String documentType;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    //private List<Invoice> invoices = new ArrayList<Invoice>();
+    @JsonIgnore
+    private List<Invoice> invoices = new ArrayList<>();
 
     @Override
-    public String toString() { return ""; }
+    public String toString() {
+        return "";
+    }
 }

@@ -2,7 +2,7 @@ package com.pos.controller;
 
 import com.pos.model.Client;
 import com.pos.model.MessageResponse;
-import com.pos.model.dto.ClientDto;
+import com.pos.model.dto.ClientDtoRequest;
 import com.pos.service.ClientService;
 import com.pos.util.DtoEntityConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +25,14 @@ public class ClientController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Client> postClient(@RequestBody ClientDto body) {
+    public ResponseEntity<Client> postClient(@RequestBody ClientDtoRequest body) {
         Client client = this.dtoEntityConverter.convertClientToIdentity(body);
         client = this.clientService.createClient(client);
         return new ResponseEntity<Client>(client, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Client> putClient(@PathVariable Integer id, @RequestBody ClientDto body) {
+    public ResponseEntity<Client> putClient(@PathVariable Integer id, @RequestBody ClientDtoRequest body) {
         Client client = this.dtoEntityConverter.convertClientToIdentity(body);
         client.setId(id);
         client = this.clientService.updateClientById(client, id);
@@ -48,6 +48,6 @@ public class ClientController {
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponse> deleteClient(@PathVariable Integer id) {
         this.clientService.removeClient(id);
-        return new ResponseEntity<>(new MessageResponse("Client deleted succesfully"), HttpStatus.OK);
+        return new ResponseEntity<MessageResponse>(new MessageResponse("Client deleted succesfully"), HttpStatus.OK);
     }
 }

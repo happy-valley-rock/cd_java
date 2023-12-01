@@ -1,8 +1,8 @@
 package com.pos.controller;
 
-import com.pos.model.Product;
 import com.pos.model.MessageResponse;
-import com.pos.model.dto.ProductDto;
+import com.pos.model.Product;
+import com.pos.model.dto.ProductDtoRequest;
 import com.pos.service.ProductService;
 import com.pos.util.DtoEntityConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +25,14 @@ public class ProductController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Product> postProduct(@RequestBody ProductDto body) {
+    public ResponseEntity<Product> postProduct(@RequestBody ProductDtoRequest body) {
         Product product = this.dtoEntityConverter.convertProductToIdentity(body);
         product = this.productService.createProduct(product);
         return new ResponseEntity<Product>(product, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> putProduct(@PathVariable Integer id, @RequestBody ProductDto body) {
+    public ResponseEntity<Product> putProduct(@PathVariable Integer id, @RequestBody ProductDtoRequest body) {
         Product product = this.dtoEntityConverter.convertProductToIdentity(body);
         product.setId(id);
         product = this.productService.updateProductById(product, id);

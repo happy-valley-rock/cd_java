@@ -2,44 +2,57 @@ package com.pos.util;
 
 import com.pos.model.Client;
 import com.pos.model.Invoice;
+import com.pos.model.InvoiceDetail;
 import com.pos.model.Product;
-import com.pos.model.dto.ClientDto;
-import com.pos.model.dto.InvoiceDto;
-import com.pos.model.dto.ProductDto;
+import com.pos.model.dto.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class DtoEntityConverter {
     @Autowired
     private ModelMapper modelMapper;
 
-    public ClientDto convertClientToDto(Client client) {
-        ClientDto clientDto = this.modelMapper.map(client, ClientDto.class);
-        return clientDto;
+    public ClientDtoRequest convertClientToDto(Client client) {
+        return this.modelMapper.map(client, ClientDtoRequest.class);
     }
 
-    public Client convertClientToIdentity(ClientDto clientDto) {
-        Client client = this.modelMapper.map(clientDto, Client.class);
-        return  client;
+    public Client convertClientToIdentity(ClientDtoRequest clientDtoRequest) {
+        return this.modelMapper.map(clientDtoRequest, Client.class);
     }
 
-    public ProductDto convertProductToDto(Product product) {
-        ProductDto productDto = this.modelMapper.map(product, ProductDto.class);
-        return productDto;
+    public ProductDtoRequest convertProductToDto(Product product) {
+        return this.modelMapper.map(product, ProductDtoRequest.class);
     }
 
-    public Product convertProductToIdentity(ProductDto productDto) {
-        Product product = this.modelMapper.map(productDto, Product.class);
-        return product;
+    public Product convertProductToIdentity(ProductDtoRequest productDtoRequest) {
+        return this.modelMapper.map(productDtoRequest, Product.class);
     }
 
-    public InvoiceDto convertInvoiceToDto(Invoice invoice) {
-        InvoiceDto invoiceDto = this.modelMapper.map(invoice, InvoiceDto.class);
-        return invoiceDto;
+    public InvoiceDtoRequest convertInvoiceToDto(Invoice invoice) {
+        return this.modelMapper.map(invoice, InvoiceDtoRequest.class);
     }
 
-    public Invoice convertInvoiceToIdentity(InvoiceDto invoiceDto, Client client) {
-        Invoice invoice = this.modelMapper.map(invoiceDto, Invoice.class);
-        return invoice;
+    public ProductDtoResponse convertProductToDtoResponse(Product product) {
+        return this.modelMapper.map(product, ProductDtoResponse.class);
+    }
+
+    public InvoiceDetailDtoResponse convertInvoiceDetailToDtoResponse(InvoiceDetail invoiceDetail) {
+        InvoiceDetailDtoResponse invoiceDetailDtoResponse = this.modelMapper.map(invoiceDetail, InvoiceDetailDtoResponse.class);
+        invoiceDetailDtoResponse.setProduct(convertProductToDtoResponse(invoiceDetail.getProduct()));
+        return invoiceDetailDtoResponse;
+    }
+
+    public InvoiceDtoResponse convertInvoiceToDtoResponse(Invoice invoice) {
+        List<InvoiceDetailDtoResponse> invoiceDetailDtoResponse = invoice
+                .getDetails()
+                .stream()
+                .map(this::convertInvoiceDetailToDtoResponse)
+                .toList();
+
+        InvoiceDtoResponse invoiceDtoResponse = this.modelMapper.map(invoice, InvoiceDtoResponse.class);
+        invoiceDtoResponse.setDetails(invoiceDetailDtoResponse);
+        return invoiceDtoResponse;
     }
 }

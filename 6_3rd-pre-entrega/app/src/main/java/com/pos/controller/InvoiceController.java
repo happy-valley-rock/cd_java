@@ -1,8 +1,8 @@
 package com.pos.controller;
 
-import com.pos.model.Invoice;
 import com.pos.model.MessageResponse;
-import com.pos.model.dto.InvoiceDto;
+import com.pos.model.dto.InvoiceDtoRequest;
+import com.pos.model.dto.InvoiceDtoResponse;
 import com.pos.service.InvoiceService;
 import com.pos.util.DtoEntityConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,23 +24,15 @@ public class InvoiceController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Invoice> postInvoice(@RequestBody InvoiceDto body) {
-        Invoice invoice = this.invoiceService.createInvoice(body);
-        return new ResponseEntity<>(invoice, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Invoice> putInvoice(@PathVariable Integer id, @RequestBody InvoiceDto body) {
-        //Invoice invoice = this.dtoEntityConverter.convertInvoiceToIdentity(body);
-        //invoice.setId(id);
-        //invoice = this.invoiceService.updateInvoiceById(invoice, id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<InvoiceDtoResponse> postInvoice(@RequestBody InvoiceDtoRequest body) {
+        InvoiceDtoResponse invoice = this.dtoEntityConverter.convertInvoiceToDtoResponse(this.invoiceService.createInvoice(body));
+        return new ResponseEntity<InvoiceDtoResponse>(invoice, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Invoice> getInvoice(@PathVariable Integer id) {
-        Invoice invoice = this.invoiceService.getById(id);
-        return new ResponseEntity<Invoice>(invoice, HttpStatus.OK);
+    public ResponseEntity<InvoiceDtoResponse> getInvoice(@PathVariable Integer id) {
+        InvoiceDtoResponse invoice = this.dtoEntityConverter.convertInvoiceToDtoResponse(this.invoiceService.getById(id));
+        return new ResponseEntity<InvoiceDtoResponse>(invoice, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

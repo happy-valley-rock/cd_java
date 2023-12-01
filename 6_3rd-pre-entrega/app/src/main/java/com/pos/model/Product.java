@@ -3,9 +3,13 @@ package com.pos.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Data
 @Entity
-@Table(name = "products", schema = "billing_project")
+@Table(name = "products", schema = "pos_simple")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +20,13 @@ public class Product {
     private Double sellPrice;
     private Double purchasePrice;
 
-    @Override
-    public String toString() { return ""; }
+    public static HashMap<Integer, Product> getHashMap(List<Product> listProduct) {
+        return listProduct
+                .stream()
+                .collect(Collectors.toMap(
+                        Product::getId,
+                        product -> product,
+                        (existing, replacement) -> existing, HashMap::new));
+
+    }
 }

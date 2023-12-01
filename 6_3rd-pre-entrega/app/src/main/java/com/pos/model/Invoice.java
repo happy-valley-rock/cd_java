@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "invoices", schema = "billing_project")
+@Table(name = "invoices", schema = "pos_simple")
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,13 +21,15 @@ public class Invoice {
     @Column(name = "created_at")
     private Date createdAt = new Date();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client client;
 
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
-    private List<InvoiceDetails> details = new ArrayList<InvoiceDetails>();
+    private List<InvoiceDetail> details = new ArrayList<InvoiceDetail>();
 
     @Override
-    public String toString() { return ""; }
+    public String toString() {
+        return "";
+    }
 }

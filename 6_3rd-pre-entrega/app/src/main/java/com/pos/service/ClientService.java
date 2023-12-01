@@ -2,7 +2,6 @@ package com.pos.service;
 
 import com.pos.model.Client;
 import com.pos.repository.ClientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,7 +11,6 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
 
-    @Autowired
     public ClientService(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
@@ -32,7 +30,7 @@ public class ClientService {
     public Client createClient(Client client) {
         System.out.println("> Create a client");
         try {
-             return this.clientRepository.save(client);
+            return this.clientRepository.save(client);
         } catch (Exception exception) {
             exception.printStackTrace();
             throw exception;
@@ -56,8 +54,7 @@ public class ClientService {
         try {
             this.getById(clientId);
             this.clientRepository.deleteById(clientId);
-        }
-        catch (Exception exception) {
+        } catch (Exception exception) {
             exception.printStackTrace();
             throw exception;
         }

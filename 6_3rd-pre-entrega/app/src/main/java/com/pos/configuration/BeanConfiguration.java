@@ -13,5 +13,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public DtoEntityConverter dtoEntityConverter() { return  new DtoEntityConverter(); }
+    public DtoEntityConverter dtoEntityConverter() {
+        return new DtoEntityConverter();
+    }
 }
