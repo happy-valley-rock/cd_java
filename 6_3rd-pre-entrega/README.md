@@ -68,4 +68,4 @@ spring.jpa.hibernate.ddl-auto=update
 
 ## DER
 
-<img src="./assets/der.drawio.png" width="100%">
+![image](./assets/der-drawio.png)
