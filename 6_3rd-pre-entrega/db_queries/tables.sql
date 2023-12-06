@@ -16,7 +16,8 @@ CREATE TABLE pos_simple.clients(
 CREATE TABLE pos_simple.invoices(
   id SERIAL PRIMARY KEY,
   client_id INT,
-  total DOUBLE PRECISION,
+  total_price DOUBLE PRECISION,
+  total_amount INT,
   created_at DATE,
   CONSTRAINT fk_client_id FOREIGN KEY (client_id) REFERENCES pos_simple.clients(id)
 );
