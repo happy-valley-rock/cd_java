@@ -38,7 +38,15 @@ After that you can run the project with
 mvn spring-boot:run
 ```
 
-Also you can test all the services with the [Postman](./collection_postman/POS Simple.postman_collection.json) collection in `/collection_postman`
+Also you can test all the services with the [Postman](./collection_postman/POS Simple.postman_collection.json) collection in `/collection_postman` or check the Swagger documentation in the uri `{host}/swagger-ui/index.html`
+And for config the database (in PostgreSQL) you can use the SQL scripts in the directory `/db_queries`
+
+```
+schema.sql
+tables.sql
+seed.sql
+setup-all.sql
+```
 
 ## Environment
 
@@ -58,14 +66,18 @@ spring.jpa.hibernate.ddl-auto=update
 
 ## Dependencies
 
-| groupId                  | artifactId                   | version |
-|--------------------------|------------------------------|---------|
-| org.springframework.boot | spring-boot-starter-data-jpa | current |
-| org.springframework.boot | spring-boot-starter-web      | current |
-| org.projectlombok        | lombok                       | current |
-| org.postgresql           | postgresql                   | current |
-| org.modelmapper          | modelmapper                  | 3.2.0   |
+| groupId                  | artifactId                          | version |
+|--------------------------|-------------------------------------|---------|
+| org.springframework.boot | spring-boot-starter-data-jpa        | current |
+| org.springframework.boot | spring-boot-starter-web             | current |
+| org.projectlombok        | lombok                              | current |
+| org.postgresql           | postgresql                          | current |
+| org.modelmapper          | modelmapper                         | 3.2.0   |
+| org.springdoc            | springdoc-openapi-starter-webmvc-ui | 2.0.2   |
+| com.github.librepdf      | openpdf                             | 1.3.33  |
 
 ## DER
 
 ![image](./assets/der-drawio.png)
+
+<img src="./assets/der.png" alt="DER-image" />
