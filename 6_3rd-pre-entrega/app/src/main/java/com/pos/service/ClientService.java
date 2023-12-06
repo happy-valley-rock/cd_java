@@ -4,6 +4,7 @@ import com.pos.model.Client;
 import com.pos.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,6 +55,17 @@ public class ClientService {
         try {
             this.getById(clientId);
             this.clientRepository.deleteById(clientId);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            throw exception;
+        }
+    }
+
+    public List<Client> getList() {
+        System.out.println("> Get client list");
+        try {
+            List<Client> clientList = this.clientRepository.findAll();
+            return clientList;
         } catch (Exception exception) {
             exception.printStackTrace();
             throw exception;

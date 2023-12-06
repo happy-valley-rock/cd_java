@@ -82,11 +82,12 @@ public class ProductService {
         List<Integer> listIds = InvoiceDetailDtoRequest.getProductIdFromList(listInvoiceDetailDtoRequest);
         List<Product> listProduct = new ArrayList<Product>();
 
-        Integer a = hashMapInvoiceDetailsDto.get(0);
-
         try {
             listProduct = this.productRepository.findAllById(listIds);
-            listProduct.stream().map(product -> this.checkAvailable(product, hashMapInvoiceDetailsDto.get(product.getId())));
+            for (int i = 0; i < listProduct.size(); i++) {
+                Product product = listProduct.get(i);
+                this.checkAvailable(product, hashMapInvoiceDetailsDto.get(product.getId()));
+            }
         } catch (Exception exception) {
             exception.printStackTrace();
             throw exception;
@@ -98,6 +99,17 @@ public class ProductService {
     public void updateManyProducts(Iterable<Product> products) {
         try {
             this.productRepository.saveAll(products);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            throw exception;
+        }
+    }
+
+    public List<Product> getList() {
+        System.out.println("> Get product list");
+        try {
+            List<Product> productList = this.productRepository.findAll();
+            return productList;
         } catch (Exception exception) {
             exception.printStackTrace();
             throw exception;

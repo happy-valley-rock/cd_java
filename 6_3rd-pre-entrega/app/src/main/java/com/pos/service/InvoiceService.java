@@ -7,6 +7,7 @@ import com.pos.model.dto.InvoiceDtoRequest;
 import com.pos.repository.InvoiceRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,15 +17,18 @@ public class InvoiceService {
     private final InvoiceRepository invoiceRepository;
     private final ClientService clientService;
     private final InvoiceDetailService invoiceDetailService;
+    private final WorldClockApiService worldClockApiService;
 
     public InvoiceService(
             InvoiceRepository invoiceRepository,
             ClientService clientService,
-            InvoiceDetailService invoiceDetailService
+            InvoiceDetailService invoiceDetailService,
+            WorldClockApiService worldClockApiService
     ) {
         this.invoiceRepository = invoiceRepository;
         this.clientService = clientService;
         this.invoiceDetailService = invoiceDetailService;
+        this.worldClockApiService = worldClockApiService;
     }
 
     public Invoice getById(Integer invoiceId) {
@@ -44,6 +48,7 @@ public class InvoiceService {
 
         Client client = this.clientService.getById(invoiceData.getClientId());
         Invoice invoice = new Invoice();
+        this.setNewDateInvoice(invoice);
         invoice.setClient(client);
 
         try {
@@ -80,5 +85,10 @@ public class InvoiceService {
             exception.printStackTrace();
             throw exception;
         }
+    }
+
+    private void setNewDateInvoice(Invoice invoice) {
+        Date currentDate = this.worldClockApiService.getUtcTimeNow();
+        invoice.setCreatedAt(currentDate);
     }
 }

@@ -15,11 +15,14 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Double total = 0d;
+    @Column(name = "total_price")
+    private Double totalPrice = 0d;
+    @Column(name = "total_amount")
+    private Integer totalAmount = 0;
 
     @CreatedDate
     @Column(name = "created_at")
-    private Date createdAt = new Date();
+    private Date createdAt;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")

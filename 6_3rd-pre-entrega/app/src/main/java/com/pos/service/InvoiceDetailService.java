@@ -1,6 +1,5 @@
 package com.pos.service;
 
-import com.pos.model.Client;
 import com.pos.model.Invoice;
 import com.pos.model.InvoiceDetail;
 import com.pos.model.Product;
@@ -41,6 +40,7 @@ public class InvoiceDetailService {
         HashMap<Integer, Product> hashMapProduct = Product.getHashMap(listProducts);
         List<InvoiceDetail> listInvoiceDetails = new ArrayList<InvoiceDetail>();
         Double totalPrice = 0d;
+        Integer totalAmount = 0;
 
         for (int i = 0; i < purchaseProducts.size(); i++) {
             Product product = hashMapProduct.get(purchaseProducts.get(i).getProductId());
@@ -49,11 +49,13 @@ public class InvoiceDetailService {
 
             listInvoiceDetails.add(new InvoiceDetail(price, amount, invoice, product));
             totalPrice += price;
+            totalAmount += amount;
         }
 
         this.invoiceDetailRepository.saveAll(listInvoiceDetails);
         this.productService.updateManyProducts(listProducts);
-        invoice.setTotal(totalPrice);
+        invoice.setTotalPrice(totalPrice);
+        invoice.setTotalAmount(totalAmount);
         return listInvoiceDetails;
     }
 }
