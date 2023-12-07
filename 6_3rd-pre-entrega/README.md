@@ -91,6 +91,4 @@ GENERATE_SOURCEMAP=false
 
 ## DER
 
-![image](./assets/der-drawio.png)
-
 <img src="./assets/der.png" alt="DER-image" />
