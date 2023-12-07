@@ -28,7 +28,6 @@ For build and setup this project is only necessary have
 - [Java SE Runtime Environment (JRE) 1.8.0_202](https://www.oracle.com/ar/java/technologies/javase/javase8-archive-downloads.html)
 - [Java SE Development Kit (JDK) 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 - [Apache Maven 3.9.5](https://maven.apache.org/download.cgi)
-- [Node JS 18.16.0](https://nodejs.org);
 
 You can make all the install with the script tool in `/tool-project.sh` and running too or follow the next steps.
 
@@ -74,7 +73,7 @@ spring.jpa.hibernate.ddl-auto=update
 #client(frontend)
 
 API_HOST=http://localhost:8000
-PORT=8001
+PORT=8000
 LANGUAGE=en
 ESLINT_IGNORE=false
 GENERATE_SOURCEMAP=false

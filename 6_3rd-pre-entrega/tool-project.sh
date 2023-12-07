@@ -45,11 +45,11 @@ pwd
 
 echo "${red}#STEP --> Installing dependecies and build${reset}"
 rm -rf bundle;
-mkdir -p bundle/build/static;
+mkdir -p bundle/build/;
 mvn clean install -Pprod -f ./app/pom.xml;
 cp ./app/target/classes/application.properties ./bundle/build/application.properties;
 cp ./app/target/*.jar ./bundle/build/;
-cp -r ./app/target/classes/static ./bundle/build/;
+#cp -r ./app/target/classes/static ./bundle/build/;
 
 echo "${red}#STEP --> Compressed build files${reset}"
 mkdir -p bundle/compressed;

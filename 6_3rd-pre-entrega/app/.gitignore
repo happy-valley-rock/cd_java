@@ -35,3 +35,4 @@ build/
 
 ### ENV VAR ###
 .env
+src/main/resources/static/

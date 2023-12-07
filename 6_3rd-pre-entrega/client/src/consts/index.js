@@ -5,7 +5,7 @@ export {
 
 export {
   API_HOST,
-  API_HOST_WEBSOCKET,
+  PORT,
   LANGUAGE,
   AUTH_ENABLED
 } from './config';
@@ -22,8 +22,7 @@ export {
   REFRESH_TOKEN,
   TOKEN,
   REMEMBER_ME,
-  LANGUAGE_REMEMBER,
-  INTERFACE_TYPE
+  LANGUAGE_REMEMBER
 } from './storage';
 
 export {
