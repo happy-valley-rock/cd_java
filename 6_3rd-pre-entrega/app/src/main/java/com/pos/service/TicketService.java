@@ -73,7 +73,7 @@ public class TicketService {
 
             String amount = invoiceDetail.getAmount().toString();
             Double unitPrice = (invoiceDetail.getPrice() / invoiceDetail.getAmount());
-            String price = " (" + unitPrice.toString() + ") " + invoiceDetail.getPrice().toString();
+            String price = " (" + unitPrice + ") " + invoiceDetail.getPrice();
             String description = invoiceDetail.getProduct().getDescription().toUpperCase();
             String detail = overlappedText(description + " x" + amount);
             detail = overlappedText(price, Alignment.END, detail);
@@ -99,12 +99,12 @@ public class TicketService {
 
     private String overlappedText(String text, Alignment alignment) {
         String template = " ";
-        return  overlappedText(text, alignment, template);
+        return overlappedText(text, alignment, template);
     }
 
     private String overlappedText(String text, Alignment alignment, String template) {
         int repeatCount = 48;
-        return  overlappedText(text, alignment, template, repeatCount);
+        return overlappedText(text, alignment, template, repeatCount);
     }
 
     private String overlappedText(String text, Alignment alignment, String template, int repeatCount) {

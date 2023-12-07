@@ -26,11 +26,13 @@ This project is just a simple billing system of product for a simple POS (Point 
 ## Setup
 For build and setup this project is only necessary have
 - [Java SE Runtime Environment (JRE) 1.8.0_202](https://www.oracle.com/ar/java/technologies/javase/javase8-archive-downloads.html)
-- [Java SE Development Kit (JDK) 1.8.0_202](https://www.oracle.com/ar/java/technologies/javase/javase8-archive-downloads.html)
+- [Java SE Development Kit (JDK) 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 - [Apache Maven 3.9.5](https://maven.apache.org/download.cgi)
 - [Node JS 18.16.0](https://nodejs.org);
 
-Then install dependencies and build the project with maven in directory `/pom.xml`
+You can make all the install with the script tool in `/tool-project` and running too or follow the next steps.
+
+Install dependencies and build the project with maven in directory `/pom.xml`
 ```
 mvn clean install -Prod
 ```

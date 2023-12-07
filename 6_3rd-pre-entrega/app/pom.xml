@@ -127,10 +127,10 @@
 									<goal>copy-resources</goal>
 								</goals>
 								<configuration>
-									<outputDirectory>${b asedir}/target/classes/static</outputDirectory>
+									<outputDirectory>${basedir}/target/classes/static</outputDirectory>
 									<resources>
 										<resource>
-											<directory>client/dist </directory>
+											<directory>${basedir}/../client/dist </directory>
 										</resource>
 									</resources>
 								</configuration>
@@ -142,7 +142,7 @@
 						<artifactId>frontend-maven-plugin</artifactId>
 						<version>${frontend-maven-plugin.version}</version>
 						<configuration>
-							<workingDirectory>client</workingDirectory>
+							<workingDirectory>${basedir}/../client</workingDirectory>
 						</configuration>
 						<executions>
 							<execution>
