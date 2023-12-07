@@ -54,7 +54,9 @@ setup-all.sql
 
 ## Environment
 
-``` .properties - app(backend)
+``` .properties
+#app(backend)
+
 server.port=8000
 debug=false
 
@@ -68,7 +70,9 @@ spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=update
 ```
 
-```.env - client(frontend)
+```.env
+#client(frontend)
+
 API_HOST=http://localhost:8000
 PORT=8001
 LANGUAGE=en
