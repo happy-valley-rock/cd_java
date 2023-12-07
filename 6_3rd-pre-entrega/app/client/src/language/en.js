@@ -50,7 +50,8 @@ const en = {
     totalPrice: 'Total price: {{total}} $',
     totalAmount: 'Total amount: {{total}}',
     button: 'generate invoice',
-    ticket: 'Ticket'
+    ticket: 'Ticket',
+    alert: 'Invoice created successfully! 😎'
   },
   common: {
     components: {

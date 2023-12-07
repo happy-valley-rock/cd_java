@@ -13,7 +13,7 @@ export const fetchGetClients = createAsyncThunk(
     try {
       const response = await services.getClientList(payload);
       return response.data;
-    } catch (e) {
+    } catch (error) {
       return thunkAPI.rejectWithValue(formatErrorResponse(error));
     }
   }

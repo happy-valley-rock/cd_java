@@ -14,10 +14,10 @@ export const fetchPostInvoice = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await services.postInvoice(payload);
-      thunkAPI.dispatch(openAlert({ severity: 'success', message: 'view.login.alert.info' }));
+      thunkAPI.dispatch(openAlert({ severity: 'success', message: 'invoice.alert' }));
       return response.data;
-    } catch (e) {
-      thunkAPI.dispatch(openAlert({ severity: 'error', message: 'view.login.alert.error' }));
+    } catch (error) {
+      thunkAPI.dispatch(openAlert({ severity: 'error', message: error.response.data.error }));
       return thunkAPI.rejectWithValue(formatErrorResponse(error));
     }
   }
