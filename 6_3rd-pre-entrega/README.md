@@ -91,5 +91,4 @@ GENERATE_SOURCEMAP=false
 
 ## DER
 
-![der](./assets/der.png)
-<img src="./assets/der.png" alt="DER-image" />
+![der](./assets/db-der.png)

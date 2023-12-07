@@ -1,0 +1,7 @@
+# apply to all files
+* text=auto eol=lf
+
+# exclude image files
+*.png binary
+*.jpg binary
+*.gif binary
