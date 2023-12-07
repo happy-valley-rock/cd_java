@@ -1,5 +1,6 @@
 package com.pos.service;
 
+import com.pos.exceptions.EntityNotFoundException;
 import com.pos.model.Client;
 import com.pos.model.Invoice;
 import com.pos.model.InvoiceDetail;
@@ -35,7 +36,7 @@ public class InvoiceService {
         System.out.println("> Get invoice by id " + invoiceId.toString());
         try {
             Optional<Invoice> optionalInvoice = this.invoiceRepository.findById(invoiceId);
-            if (optionalInvoice.orElse(null) == null) throw new Error("Invoice does not exist");
+            if (optionalInvoice.orElse(null) == null) throw new EntityNotFoundException("Invoice does not exist");
             return optionalInvoice.get();
         } catch (Exception exception) {
             exception.printStackTrace();

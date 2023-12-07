@@ -1,7 +1,7 @@
 package com.pos.service;
 
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfWriter;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.pos.model.Client;
 import com.pos.model.Invoice;
 import com.pos.model.InvoiceDetail;
@@ -27,13 +27,13 @@ public class TicketService {
 
         this.createHeader(invoice, document, font);
         this.createBody(invoice, document, font);
-        this.createFooter(invoice, document);
+        this.createFooter(invoice, document, font);
 
         document.close();
         return outputStream;
     }
 
-    private void createHeader(Invoice invoice, Document document, Font font) {
+    private void createHeader(Invoice invoice, Document document, Font font) throws DocumentException {
         Client client = invoice.getClient();
         String name = client.getFirstName().toUpperCase() + " " + client.getLastName().toUpperCase();
         String documentType = "DOCUMENT " + client.getDocumentType().toUpperCase();
@@ -41,12 +41,12 @@ public class TicketService {
         String invoiceId = "Nmber. T. : " + invoice.getId();
         String date = "Date : " + invoice.getCreatedAt().toString();
 
-        Paragraph paragraphName = new Paragraph(name, font);
-        Paragraph paragraphDocumentNumber = new Paragraph(documentNumber, font);
-        Paragraph paragraphDocumentType = new Paragraph(documentType, font);
-        Paragraph paragraphSubtitle = new Paragraph("FINAL CONSUMER", font);
-        Paragraph paragraphInvoiceId = new Paragraph(invoiceId, font);
-        Paragraph paragraphDate = new Paragraph(date, font);
+        Paragraph paragraphName = new Paragraph(overlappedText(name), font);
+        Paragraph paragraphDocumentNumber = new Paragraph(overlappedText(documentNumber), font);
+        Paragraph paragraphDocumentType = new Paragraph(overlappedText(documentType), font);
+        Paragraph paragraphSubtitle = new Paragraph(overlappedText("FINAL CONSUMER"), font);
+        Paragraph paragraphInvoiceId = new Paragraph(overlappedText(invoiceId), font);
+        Paragraph paragraphDate = new Paragraph(overlappedText(date), font);
 
         document.add(paragraphName);
         document.add(paragraphDocumentType);
@@ -56,34 +56,75 @@ public class TicketService {
         document.add(paragraphDate);
     }
 
-    private void createBody(Invoice invoice, Document document, Font font) {
+    private void createBody(Invoice invoice, Document document, Font font) throws DocumentException {
         List<InvoiceDetail> invoiceDetailList = invoice.getDetails();
-        Paragraph separator = new Paragraph("================================================", font);
-        Paragraph header = new Paragraph("DESCRIPTION                                PRICE", font);
-        separator.setAlignment(Paragraph.ALIGN_LEFT);
+        String header = overlappedText("DESCRIPTION");
+        header = overlappedText("(U) PRICE", Alignment.END, header);
 
-        document.add(separator);
-        document.add(header);
-        document.add(separator);
+        Paragraph paragraphSeparator = new Paragraph(overlappedText("="), font);
+        Paragraph paragraphHeader = new Paragraph(header, font);
+
+        document.add(paragraphSeparator);
+        document.add(paragraphHeader);
+        document.add(paragraphSeparator);
 
         for (int i = 0; i < invoiceDetailList.size(); i++) {
             InvoiceDetail invoiceDetail = invoiceDetailList.get(i);
 
             String amount = invoiceDetail.getAmount().toString();
-            String price = invoiceDetail.getPrice().toString();
+            Double unitPrice = (invoiceDetail.getPrice() / invoiceDetail.getAmount());
+            String price = " (" + unitPrice.toString() + ") " + invoiceDetail.getPrice().toString();
             String description = invoiceDetail.getProduct().getDescription().toUpperCase();
-            String detail = description + " x" + amount + " " + price;
-            Paragraph paragraphDetail = new Paragraph(detail, font);
+            String detail = overlappedText(description + " x" + amount);
+            detail = overlappedText(price, Alignment.END, detail);
+
+            Paragraph paragraphDetail = new Paragraph(overlappedText(detail), font);
             document.add(paragraphDetail);
         }
     }
 
-    public void createFooter(Invoice invoice, Document document) {
-        Font font = FontFactory.getFont(FontFactory.COURIER_BOLD, 20);
+    public void createFooter(Invoice invoice, Document document, Font font) throws DocumentException {
+        Font fontBold = FontFactory.getFont(FontFactory.COURIER_BOLD, 20);
         String total = "TOTAL : " + invoice.getTotalPrice().toString();
-        Paragraph separator = new Paragraph("...........................................", font);
-        Paragraph title = new Paragraph(total, font);
+        Paragraph separator = new Paragraph(overlappedText("."), font);
+        Paragraph title = new Paragraph(total, fontBold);
         document.add(separator);
         document.add(title);
+    }
+
+    private String overlappedText(String text) {
+        if (text.length() == 1) return overlappedText("", Alignment.START, text);
+        return overlappedText(text, Alignment.START);
+    }
+
+    private String overlappedText(String text, Alignment alignment) {
+        String template = " ";
+        return  overlappedText(text, alignment, template);
+    }
+
+    private String overlappedText(String text, Alignment alignment, String template) {
+        int repeatCount = 48;
+        return  overlappedText(text, alignment, template, repeatCount);
+    }
+
+    private String overlappedText(String text, Alignment alignment, String template, int repeatCount) {
+        if (template.length() == 1) {
+            char character = template.charAt(0);
+            template = new String(new char[repeatCount]).replace('\0', character);
+        }
+
+        if (text.length() > repeatCount) text = text.substring(0, repeatCount);
+
+        int templateLength = template.length();
+        int textLength = text.length();
+
+        if (alignment == Alignment.START) return text + template.substring(textLength, templateLength);
+        else if (alignment == Alignment.END) return template.substring(0, templateLength - textLength) + text;
+        else throw new IllegalArgumentException("Invalid alignment");
+    }
+
+    public enum Alignment {
+        START,
+        END
     }
 }

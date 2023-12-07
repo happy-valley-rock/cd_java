@@ -965,7 +965,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"clientId\": {{client_id}},\r\n    \"products\": [\r\n        {\r\n            \"productId\": {{product_id}},\r\n            \"amount\": 4\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"clientId\": {{client_id}},\r\n    \"products\": [\r\n        {\r\n            \"productId\": {{product_id}},\r\n            \"amount\": 1\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -999,6 +999,53 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n    \"clientId\": 1,\r\n    \"products\": [\r\n        {\r\n            \"productId\": 1,\r\n            \"amount\": 1\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{server}}/api/client",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"api",
+										"client"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"id\": 49,\r\n    \"ticket\": \"http://localhost:8000/api/invoice/ticket/49\",\r\n    \"total\": 25.0,\r\n    \"createdAt\": \"02/12/2023 22:53\",\r\n    \"client\": {\r\n        \"id\": 1,\r\n        \"firstName\": \"Luca\",\r\n        \"lastName\": \"Prodan\",\r\n        \"documentNumber\": \"41423901\",\r\n        \"documentType\": \"DNI\"\r\n    },\r\n    \"details\": [\r\n        {\r\n            \"id\": 1,\r\n            \"price\": 25.0,\r\n            \"amount\": 1,\r\n            \"product\": {\r\n                \"id\": 4,\r\n                \"description\": \"New product description\",\r\n                \"code\": \"21102\"\r\n            }\r\n        }\r\n    ]\r\n}"
+						},
+						{
+							"name": "201 Production",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"clientId\": 1,\r\n    \"products\": [\r\n        {\r\n            \"productId\": 1,\r\n            \"amount\": 2\r\n        },\r\n        {\r\n            \"productId\": 2,\r\n            \"amount\": 1\r\n        },\r\n        {\r\n            \"productId\": 3,\r\n            \"amount\": 1\r\n        },\r\n        {\r\n            \"productId\": 4,\r\n            \"amount\": 4\r\n        },\r\n        {\r\n            \"productId\": 5,\r\n            \"amount\": 1\r\n        }\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"

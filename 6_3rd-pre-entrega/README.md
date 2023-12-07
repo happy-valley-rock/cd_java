@@ -28,15 +28,17 @@ For build and setup this project is only necessary have
 - [Java SE Runtime Environment (JRE) 1.8.0_202](https://www.oracle.com/ar/java/technologies/javase/javase8-archive-downloads.html)
 - [Java SE Development Kit (JDK) 1.8.0_202](https://www.oracle.com/ar/java/technologies/javase/javase8-archive-downloads.html)
 - [Apache Maven 3.9.5](https://maven.apache.org/download.cgi)
+- [Node JS 18.16.0](https://nodejs.org);
 
-Then install dependencies and build the project (.jar) with maven in directory `/pom.xml`
+Then install dependencies and build the project with maven in directory `/pom.xml`
 ```
-mvn clean install
+mvn clean install -Prod
 ```
 After that you can run the project with
 ```
-mvn spring-boot:run
+mvn spring-boot:run -Pprod
 ```
+
 
 Also you can test all the services with the [Postman](./collection_postman/POS Simple.postman_collection.json) collection in `/collection_postman` or check the Swagger documentation in the uri `{host}/swagger-ui/index.html`
 And for config the database (in PostgreSQL) you can use the SQL scripts in the directory `/db_queries`
@@ -50,7 +52,7 @@ setup-all.sql
 
 ## Environment
 
-``` .properties
+``` .properties - app(backend)
 server.port=8000
 debug=false
 
@@ -64,17 +66,26 @@ spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=update
 ```
 
+```.env - client(frontend)
+API_HOST=http://localhost:8000
+PORT=8001
+LANGUAGE=en
+ESLINT_IGNORE=false
+GENERATE_SOURCEMAP=false
+```
+
 ## Dependencies
 
-| groupId                  | artifactId                          | version |
-|--------------------------|-------------------------------------|---------|
-| org.springframework.boot | spring-boot-starter-data-jpa        | current |
-| org.springframework.boot | spring-boot-starter-web             | current |
-| org.projectlombok        | lombok                              | current |
-| org.postgresql           | postgresql                          | current |
-| org.modelmapper          | modelmapper                         | 3.2.0   |
-| org.springdoc            | springdoc-openapi-starter-webmvc-ui | 2.0.2   |
-| com.github.librepdf      | openpdf                             | 1.3.33  |
+| groupId                  | artifactId                          | version  |
+|--------------------------|-------------------------------------|----------|
+| org.springframework.boot | spring-boot-starter-data-jpa        | 3.2.0    |
+| org.springframework.boot | spring-boot-starter-web             | 3.2.0    |
+| org.projectlombok        | lombok                              | current  |
+| org.postgresql           | postgresql                          | current  |
+| org.modelmapper          | modelmapper                         | 3.2.0    |
+| org.springdoc            | springdoc-openapi-starter-webmvc-ui | 2.0.2    |
+| com.itextpdf             | itextpdf                            | 5.5.13.3 |
+| com.github.eirslett      | frontend-maven-plugin               | 1.15.0   |
 
 ## DER
 

@@ -1,5 +1,6 @@
 package com.pos.service;
 
+import com.pos.exceptions.EntityNotFoundException;
 import com.pos.model.Client;
 import com.pos.repository.ClientRepository;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class ClientService {
         System.out.println("> Get client by id " + clientId.toString());
         try {
             Optional<Client> optionalClient = this.clientRepository.findById(clientId);
-            if (optionalClient.orElse(null) == null) throw new Error("Client does not exist");
+            if (optionalClient.orElse(null) == null) throw new EntityNotFoundException("Client does not exist");
             return optionalClient.get();
         } catch (Exception exception) {
             exception.printStackTrace();

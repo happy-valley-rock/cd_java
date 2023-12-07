@@ -1,5 +1,7 @@
 package com.pos.service;
 
+import com.pos.exceptions.BadRequestException;
+import com.pos.exceptions.EntityNotFoundException;
 import com.pos.model.Product;
 import com.pos.model.dto.InvoiceDetailDtoRequest;
 import com.pos.repository.ProductRepository;
@@ -23,7 +25,7 @@ public class ProductService {
         System.out.println("> Get product by id " + productId.toString());
         try {
             Optional<Product> optionalProduct = this.productRepository.findById(productId);
-            if (optionalProduct.orElse(null) == null) throw new Error("Product does not exist");
+            if (optionalProduct.orElse(null) == null) throw new EntityNotFoundException("Product does not exist");
             return optionalProduct.get();
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -68,7 +70,7 @@ public class ProductService {
         try {
             Integer stock = product.getStock();
 
-            if (amount > stock) throw new Error("Insufficient product stock");
+            if (amount > stock) throw new BadRequestException("Insufficient product stock");
             else product.setStock(stock - amount);
             return product;
         } catch (Exception exception) {

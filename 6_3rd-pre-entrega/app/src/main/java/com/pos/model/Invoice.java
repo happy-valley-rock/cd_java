@@ -30,9 +30,4 @@ public class Invoice {
 
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
     private List<InvoiceDetail> details = new ArrayList<InvoiceDetail>();
-
-    @Override
-    public String toString() {
-        return "";
-    }
 }

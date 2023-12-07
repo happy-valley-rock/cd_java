@@ -32,5 +32,4 @@ public class InvoiceDetail {
         this.invoice = invoice;
         this.product = product;
     }
-
 }

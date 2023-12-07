@@ -26,9 +26,4 @@ public class Client {
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Invoice> invoices = new ArrayList<>();
-
-    @Override
-    public String toString() {
-        return "";
-    }
 }

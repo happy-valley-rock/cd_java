@@ -1,6 +1,6 @@
 package com.pos.controller;
 
-import com.lowagie.text.DocumentException;
+import com.itextpdf.text.DocumentException;
 import com.pos.model.Invoice;
 import com.pos.model.MessageResponse;
 import com.pos.model.dto.InvoiceDtoRequest;
