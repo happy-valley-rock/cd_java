@@ -58,10 +58,10 @@ const productSlice = createSlice({
     .addCase(fetchGetProducts.fulfilled, (state, action) => {
       const productHashMap = {};
       const productListFormatted = action.payload.map((product, index) => {
-        const taxes = (product.purchasePrice-product.sellPrice)/product.sellPrice*100;
+        const taxes = (product.sellPrice-product.purchasePrice)/product.purchasePrice*100;
         product['index'] = index;
         product['taxes'] = `${Math.trunc(taxes)}%`;
-        product['price'] = `$${product.purchasePrice}`;
+        product['price'] = `$${product.sellPrice}`;
         product['stockTop'] = product.stock;
         productHashMap[`${product.id}`] = product;
         return product;

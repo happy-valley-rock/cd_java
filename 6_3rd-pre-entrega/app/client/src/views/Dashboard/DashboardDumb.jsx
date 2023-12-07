@@ -41,12 +41,12 @@ export default function DashboardDumb({
   function handleAddProduct(data) {
     validEmptyCart();
     const index = checkIsProductAdded(data);
-    
+
     if(data.stock > 0) {
-      cart.totalPrice += data.purchasePrice;
+      cart.totalPrice += data.sellPrice;
       cart.totalAmount += 1;
     }
-    
+
     if(index === -1) {
       setCart({ ...cart, products: [...cart.products, { productId: data.id, amount: 1, description: data.description }] });
     } else {
@@ -59,13 +59,13 @@ export default function DashboardDumb({
   function handleRemoveProduct(data) {
     validEmptyCart();
     const index = checkIsProductAdded(data);
-    
+
     if(data.stock < data.stockTop) {
-      cart.products[index].amount -= 1; 
+      cart.products[index].amount -= 1;
       cart.totalAmount -= 1;
-      cart.totalPrice -= data.purchasePrice;
+      cart.totalPrice -= data.sellPrice;
     }
-    
+
     if(index !== -1) {
       if(cart.products[index].amount <= 0) {
         cart.products = cart.products.filter(p => p.productId !== data.id);
@@ -107,7 +107,7 @@ export default function DashboardDumb({
       <Grid container spacing={2}>
         <DataList {...clientData} handleOnClick={handleSelectClient} columns={clientColumns} loading={loadingRequest}/>
         <DataList {...productData} actions={actionsProduct} columns={productColumns} loading={loadingRequest}/>
-      </Grid>      
+      </Grid>
     </>
   );
 };
