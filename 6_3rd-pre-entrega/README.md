@@ -30,7 +30,7 @@ For build and setup this project is only necessary have
 - [Apache Maven 3.9.5](https://maven.apache.org/download.cgi)
 - [Node JS 18.16.0](https://nodejs.org);
 
-You can make all the install with the script tool in `/tool-project` and running too or follow the next steps.
+You can make all the install with the script tool in `/tool-project.sh` and running too or follow the next steps.
 
 Install dependencies and build the project with maven in directory `/pom.xml`
 ```
@@ -91,4 +91,5 @@ GENERATE_SOURCEMAP=false
 
 ## DER
 
+![der](./assets/der.png)
 <img src="./assets/der.png" alt="DER-image" />
